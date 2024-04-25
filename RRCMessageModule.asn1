@@ -1,0 +1,31 @@
+RRC-ASN1-Module DEFINITIONS ::= BEGIN
+
+-- Определение перечисления для типов сообщения RRC
+MessageType ::= ENUMERATED{
+    rrcConnectionSetupRequest (0),
+    rrcConnectionSetupComplete (1)
+}
+
+-- Определение структуры данных для RRC Conection Setup Request
+RRCConnectionSetupRequest ::= SEQUENCE{
+    messageHeader RRCMessageHeader,
+    -- Дополнительные поля
+    mmeUEIdentity OCTET STRING,
+    sTMSI OCTET STRING,
+    cellIdentify OCTET STRING
+}
+
+-- Определение структуры данных для RRC Connection Setup Complete
+RRCConnectionSetupComplete ::= SEQUENCE {
+    messageHeader RRCMessageHeader,
+    -- Дополнительные поля 
+    integrityProtectionAlgorithm INTEGER
+}
+
+-- Общий заголовок для всех сообщений RRC
+RRCMessageHeader ::= SEQUENCE{
+    messageType MessageType,
+    messageLenght INTEGER
+}
+
+END
